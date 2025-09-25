@@ -1,0 +1,70 @@
+import numpy as np
+import pandas as pd
+
+
+#Numpy 1st que
+
+a = np.array([1,2,3],)
+b = np.array([[1],[2],[3]])
+print(a + b)  # A0 -- [[2, 3, 4], [3, 4, 5], [4, 5, 6]]
+
+#2nd que
+
+arr = np.arange(12).reshape(3,4)
+print(arr)
+print(arr[1:3,1:3])
+
+#3rd que
+
+arr = np.array([-2,-1,0,1,2])
+arr[0:5] = 0
+print(arr)   # [0 0 0 0 0]
+
+#4th que
+
+matrix = np.array([[1, np.nan, 3],[4, 5, np.nan]])
+
+row_wise_mean = np.nanmean(matrix, axis=1)
+print(row_wise_mean)  # [2. 4.5]
+
+#5th que
+
+data = np.array([10, 20, 30, 40])
+idx = np.array([True, False, True, False])
+print(data[idx])  #A) -- [10,30]
+
+#Pandas 6th que
+
+data = {'Name': ['Alice', 'Bob', 'Charlie'], 'Age': [25, 30, 35]}
+df = pd.DataFrame(data, index=[100, 101, 102])
+
+print(df)  #        Name  Age
+           #100    Alice   25
+           #101      Bob   30
+           #102  Charlie   35
+
+#7th que
+
+df = pd.DataFrame({'A': [1, 2, np.nan], 'B': [np.nan, 5, 6]})
+
+df['B'] = df['B'].fillna(df['B'].mean())
+
+print(df)
+#A    B
+#0  1.0  5.5
+#1  2.0  5.0
+#2  NaN  6.0
+
+#8th que
+
+df = pd.DataFrame({'Region': ['North', 'South', 'North', 'South'],'Sales': [100, 200, 150, 250],
+                   'Profit': [20, 30, 25, 40]})
+
+result = df.groupby('Region').agg({'Sales': 'sum', 'Profit': 'mean'})
+
+print(result)
+#           Sales  Profit
+# Region
+# North     250    22.5
+# South     450    35.0
+
